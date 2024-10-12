@@ -68,7 +68,7 @@ return new class extends Migration
         });
 
         // Tabela Publico
-        Schema::create('usuarios', function (Blueprint $table) {
+        Schema::create('usuario', function (Blueprint $table) {
             $table->id('id_usuario');
             $table->string('primeiro_nome', 45);
             $table->string('sobrenome', 45);
