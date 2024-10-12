@@ -91,14 +91,14 @@ return new class extends Migration
         });
     }
 
-    public function down()
-    {
-        Schema::dropIfExists('prefeitura');
-        Schema::dropIfExists('pro_reitoria');
-        Schema::dropIfExists('professores');
-        Schema::dropIfExists('diretores');
-        Schema::dropIfExists('publico');
-    }
+    // public function down()
+    // {
+    //     Schema::dropIfExists('prefeitura');
+    //     Schema::dropIfExists('pro_reitoria');
+    //     Schema::dropIfExists('professores');
+    //     Schema::dropIfExists('diretores');
+    //     Schema::dropIfExists('publico');
+    // }
 
 
 };
