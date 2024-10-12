@@ -18,6 +18,17 @@
             margin: 0 auto;
             height: 60vh;
         }
+        .custom-btn {
+            border-radius: 20px; /* Bordas arredondadas */
+            padding: 15px 20px; /* Padding maior */
+            font-size: 16px; /* Tamanho da fonte */
+            transition: transform 0.3s, box-shadow 0.3s; /* Efeito de transição */
+        }
+
+        .custom-btn:hover {
+            transform: translateY(-5px); /* Efeito de levitar */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Sombra */
+        }
         #cadastro{
             width: 70%;
             margin: 0 auto;
@@ -119,6 +130,22 @@
                 margin-top: 70px;
             }
         }
+
+        .custom-btn {
+            border-radius: 20px; /* Bordas arredondadas */
+            padding: 15px 20px; /* Padding maior */
+            font-size: 16px; /* Tamanho da fonte */
+            transition: transform 0.3s, box-shadow 0.3s; /* Efeito de transição */
+        }
+
+        .custom-btn:hover {
+            transform: translateY(-5px); /* Efeito de levitar */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Sombra */
+        }
+        #prefpro{
+            width: 70%;
+            margin: 0 auto;
+        }
     </style>
 </head>
 <body>
@@ -133,14 +160,40 @@
                 <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="{{route('ShowSalas')}}">Salas</a>
                 </li>
+                @auth
+                    @if (Auth::user()->tipo == 5)
+                        <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{{route('PrefCadastroSalas')}}">Cadastrar Salas</a>
+                        </li>
+                    @endif
+                @endauth
+                @auth
+                    @if (Auth::user()->tipo == 3)
+                    <div class="nav-item dropdown">
+                        <a class="nav-link active dropdown-toggle" data-bs-toggle="dropdown" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Equipamentos
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{{ route('DirCadastroEquipamentos') }}">
+                                 Cadastrar novo
+                            </a>
+                            <a class="dropdown-item" aria-current="page" href="{{route('ShowEquipamentos')}}">Cadastrados</a>
+                        </div>
+                    </div>
+                    @else
+                    <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{route('ShowEquipamentos')}}">Equipamentos</a>
+                    </li>
+                    @endif
+                @endauth
             </ul>
-            <form class="d-flex " id="usr">
+            <form class="d-flex" id="usr">
                 @auth
                     <div class="nav-item dropdown">
                         <a class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {{ Auth::user()->primeiro_nome }}
                         </a>
-                        <div class="dropdown-menu">
+                        <div class="dropdown-menu mr-4">
                             <a class="dropdown-item" href="{{ route('editUser', Auth::user()->id_usuario) }}">
                                  Editar Perfil
                             </a>

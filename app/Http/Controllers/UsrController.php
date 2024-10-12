@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Prefeitura;
 use Illuminate\Http\Request;
 use App\Models\User;
 // use Illuminate\Contracts\Session\Session;
