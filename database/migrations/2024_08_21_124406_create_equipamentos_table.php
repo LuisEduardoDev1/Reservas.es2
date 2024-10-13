@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('equipamentos', function (Blueprint $table) {
             $table->id('id_equipamentos');
             $table->string('nome', 45);
-            $table->integer('quantidade');
+            $table->integer('serialNum');
             $table->string('marca', 50);
             $table->string('descricao', 255);
             $table->date('created_at')->nullable();

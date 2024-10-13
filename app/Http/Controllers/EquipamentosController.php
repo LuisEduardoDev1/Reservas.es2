@@ -12,7 +12,7 @@ class EquipamentosController extends Controller
         $register = new Equipamentos;
         
         $register->nome = $request->campoEquipamento;
-        $register->quantidade = $request->campoQtd;
+        $register->serialNum = $request->campoQtd;
         $register->marca = $request->campoMarca;
         $register->descricao = $request->campoDescricao;
 

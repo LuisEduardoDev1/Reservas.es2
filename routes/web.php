@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CadastrosController;
 use App\Http\Controllers\DiretorController;
+use App\Http\Controllers\EquipamentosController;
 use App\Http\Controllers\PrefeituraController;
 use App\Http\Controllers\ProfessorController;
 use App\Http\Controllers\TipoUserController;
@@ -50,3 +51,6 @@ Route::middleware(['auth', TipoUserController::class])->group(function () {
     Route::get('/cadastro/equipamentos', function () {return view('cadastro.equipamentos');})->name('DirCadastroEquipamentos');
     Route::post('/cadastro/equipamentos', [CadastrosController::class, 'cadastrarEquipamento']);
 });
+
+Route::post('/equipamentos', [EquipamentosController::class, 'store'])->name('adminEquipamentos.store');
+Route::get('/equipamentos/{id}/edit', [EquipamentosController::class, 'edit'])->name('adminEquipamentos.edit');
