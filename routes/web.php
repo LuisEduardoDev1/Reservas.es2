@@ -22,12 +22,13 @@ Route::get('/cadastro/professor', function() {return view('cadastro.professor');
 Route::post('/cadastro/professor', [ProfessorController::class, 'cadastrar']);
 
 Route::get('/cadastro/proReitura', function() {return view('cadastro.proReitura');})->name('cadastroProReitura');
+Route::post('/cadastro/proReitura', [UsrController::class, 'cadastrar']);
 
 Route::get('/cadastro/prefeitura', function() {return view('cadastro.prefeitura');})->name('cadastroPrefeitura');
-Route::post('/cadastro/prefeitura', [PrefeituraController::class, 'cadastrar']);
+Route::post('/cadastro/prefeitura', [UsrController::class, 'cadastrar']);
 
 Route::get('/cadastro/diretor', function() {return view('cadastro.diretor');})->name('cadastroDiretor');
-Route::post('/cadastro/diretor', [DiretorController::class, 'cadastrar']);
+Route::post('/cadastro/diretor', [UsrController::class, 'cadastrar']);
 
 Route::get('/login', function(){return view('login');})->name('login');
 Route::post('/login', [UsrController::class, 'logar']);

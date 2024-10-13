@@ -191,7 +191,13 @@
                 @auth
                     <div class="nav-item dropdown">
                         <a class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        @if(Auth::user()->tipo == 5)
+                            {{Auth::user()->nome_prefeitura}} 
+                        @elseif (Auth::user()->tipo == 4)  
+                            {{ Auth::user()->nome_proReitoria }}
+                        @else
                             {{ Auth::user()->primeiro_nome }}
+                        @endif
                         </a>
                         <div class="dropdown-menu mr-4">
                             <a class="dropdown-item" href="{{ route('editUser', Auth::user()->id_usuario) }}">

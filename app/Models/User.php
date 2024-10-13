@@ -23,6 +23,11 @@ class User extends Authenticatable
         'id_usuario',
         'primeiro_usuario',
         'sobrenome',
+        'nome_proReitoria',
+        'universidade',
+        'nome_prefeitura',
+        'cidade',
+        'cnpj_prefeitura',
         'email',
         'senha',
         'cpf'
