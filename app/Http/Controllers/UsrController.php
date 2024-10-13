@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Prefeitura;
 use Illuminate\Http\Request;
 use App\Models\User;
-use Illuminate\Contracts\Session\Session as SessionSession;
 // use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\Facades\Auth;
 use Session;
