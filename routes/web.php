@@ -49,7 +49,7 @@ Route::middleware(['auth', TipoUserController::class])->group(function () {
 
     //Rotas específicas Diretor
     Route::get('/cadastro/equipamentos', function () {return view('cadastro.equipamentos');})->name('DirCadastroEquipamentos');
-    Route::post('/cadastro/equipamentos', [CadastrosController::class, 'cadastrarEquipamento']);
+    Route::post('/cadastro/equipamentos', [EquipamentosController::class, 'cadastrarEquipamento']);
 });
 
 Route::post('/equipamentos', [EquipamentosController::class, 'store'])->name('adminEquipamentos.store');
