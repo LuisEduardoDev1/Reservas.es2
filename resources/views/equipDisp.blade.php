@@ -15,7 +15,7 @@
                     @auth
                     @if(Auth::user()->tipo==3)
                         <div>
-                            <a href="#" class="btn btn-warning btn-sm text-white mr-2">
+                            <a href="{{route('DirEditEquipamentos', $equipamento->id_equipamentos)}}" class="btn btn-warning btn-sm text-white mr-2">
                                 <i class="fas fa-edit"></i>
                             </a>
                             <form action="#" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir?');" style="display:inline;">

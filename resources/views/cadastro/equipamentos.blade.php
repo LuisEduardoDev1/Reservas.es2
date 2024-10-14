@@ -27,7 +27,7 @@
                 </div>
                 <div>
                     <label for="campoDescricao" class="form-label mt-3">Descrição:</label>
-                    <input type="text" class="form-control" name="campoDescricao" value="{{old('campoDescricao')}}" id="campoDescricao" required>
+                    <input type="text" class="form-control" name="campoDescricao" value="{{old('campoDescricao')}}" id="campoDescricao"  placeholder="ex: 5000 lumens ou Processador I3, SSD 256gb, 4gb RAM" required>
                 </div>
             </div>
             <div class="d-flex justify-content-end mt-3">

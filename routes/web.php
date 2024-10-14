@@ -52,5 +52,6 @@ Route::middleware(['auth', TipoUserController::class])->group(function () {
     Route::post('/cadastro/equipamentos', [EquipamentosController::class, 'cadastrarEquipamento']);
 });
 
-Route::post('/equipamentos', [EquipamentosController::class, 'store'])->name('adminEquipamentos.store');
-Route::get('/equipamentos/{id}/edit', [EquipamentosController::class, 'edit'])->name('adminEquipamentos.edit');
+Route::get('/equipamentos/{id}/edit', [EquipamentosController::class, 'edit'])->name('DirEditEquipamentos');
+Route::put('/equipamentos/{id}', [EquipamentosController::class, 'update'])->name('DirAtualizaEquipamentos');
+Route::delete('/equipamentos/{id}', [EquipamentosController::class, 'destroy'])->name('DirDestroyEquipamentos');
