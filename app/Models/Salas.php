@@ -20,6 +20,7 @@ class Salas extends Model
     protected $fillable = [
         'id_sala',
         'numero',
-        'quantidade'
+        'quantidade',
+        'tamanho'
     ];
 }
