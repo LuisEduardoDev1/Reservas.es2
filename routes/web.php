@@ -50,8 +50,10 @@ Route::middleware(['auth', TipoUserController::class])->group(function () {
     //Rotas específicas Diretor
     Route::get('/cadastro/equipamentos', function () {return view('cadastro.equipamentos');})->name('DirCadastroEquipamentos');
     Route::post('/cadastro/equipamentos', [EquipamentosController::class, 'cadastrarEquipamento']);
+    Route::get('/reserva/salas', function () {return view('reservas.diretor');})->name('DirReservaSalas');
 });
 
 Route::get('/equipamentos/{id}/edit', [EquipamentosController::class, 'edit'])->name('DirEditEquipamentos');
 Route::put('/equipamentos/{id}', [EquipamentosController::class, 'update'])->name('DirAtualizaEquipamentos');
 Route::delete('/equipamentos/{id}', [EquipamentosController::class, 'destroy'])->name('DirDestroyEquipamentos');
+
