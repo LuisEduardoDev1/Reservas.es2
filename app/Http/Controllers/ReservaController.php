@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ReservaProf;
 use App\Models\Salas;
 use Illuminate\Http\Request;
 
@@ -11,4 +12,22 @@ class ReservaController extends Controller
         $salas = Salas::all();
         return view('reservas.professor', compact('salas'));
     }
+
+    function profStore(Request $request){
+        $register = new ReservaProf();
+
+        $register->id_sala = $request->campoSala;
+        $register->data = $request->campoData;
+        $register->horario_inicio = $request->campoHoraIni;
+        $register->horario_fim = $request->campoHoraFim;
+        $register->descricao = $request->campoDescricao;
+        $register->id_professor = auth()->User()->id_usuario;
+        $register->status = 'aguardando aprovação';
+
+
+        $register->save();
+
+        return redirect()->back()->with('success', 'Reserva solicitada, aguarde a autorização da Prefeitura!');
+    }
+
 }

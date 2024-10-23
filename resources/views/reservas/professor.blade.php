@@ -20,23 +20,24 @@
 
                 </div>
                 <div>
-                    <label for="campoAno" class="form-label mt-3">Ano:</label>
-                    <select class="form-select" aria-label="Default select example" id="campoAno" name="campoAno">
-                        <option value="" disabled selected>Selecione</option>
-                        <option value="2024">2024</option>
-                        <option value="2025">2025</option>
-                    </select>
+                    <label for="campoData" class="form-label mt-3">Ano:</label>
+                    <input type="date" class="form-control" value="{{old('campoData')}}" name="campoData" id="campoData">
                 </div>
             </div>
             <div class="nome">
                 <div>
-                    <label for="campoPeriodo" class="form-label mt-3">Período:</label>
-                    <input type="text" class="form-control" name="campoPeriodo" value="{{old('campoPeriodo')}}" id="campoPeriodo" required>
+                    <label for="campoHoraIni" class="form-label mt-3">Horário início:</label>
+                    <input type="time" class="form-control" name="campoHoraIni" value="{{old('campoHoraIni')}}" id="campoHoraIni" required>
                 </div>
                 <div>
-                    <label for="campoDias" class="form-label mt-3">Dias da semana:</label>
-                    <input type="text" class="form-control" name="campoDias" value="{{old('campoDias')}}" id="campoDias" required>
+                    <label for="campoHoraFim" class="form-label mt-3">Horário fim:</label>
+                    <input type="time" class="form-control" name="campoHoraFim" value="{{old('campoHoraFim')}}" id="campoHoraFim" required>
                 </div>
+            </div>
+            <div>
+                <label for="campoDescricao" class="form-label mt-3">Descrição:</label>
+                <textarea rows="7" class="form-control" style="resize: none;" name="campoDescricao" value="{{old('campoDescricao')}}" id="campoDescricao" required>
+                </textarea>
             </div>
             <div class="d-flex justify-content-end mt-3">
                 <button type="submit" class="btn btn-primary">Cadastrar</button>
