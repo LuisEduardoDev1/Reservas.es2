@@ -5,6 +5,7 @@ use App\Http\Controllers\DiretorController;
 use App\Http\Controllers\EquipamentosController;
 use App\Http\Controllers\PrefeituraController;
 use App\Http\Controllers\ProfessorController;
+use App\Http\Controllers\ReservaController;
 use App\Http\Controllers\TipoUserController;
 use App\Http\Controllers\UsrController;
 use Illuminate\Support\Facades\Route;
@@ -41,7 +42,9 @@ Route::get('/show/equipamentos', [CadastrosController::class, 'showEquip'])->nam
 Route::middleware(['auth', TipoUserController::class])->group(function () {
     Route::get('/usuario/{id_usuario}/edit', [UsrController::class, 'edit'])->name('editUser');
     Route::put('/usuarios/{id_usuario}', [UsrController::class, 'update'])->name('updtUser');
-    
+
+    //Rotas específicas professor
+    Route::get('/reserva/professor', [ReservaController::class, 'profReserva'])->name('ProReservaSalas');
     
     //Rotas específicas prefeitura
     Route::get('/cadastro/salas', function () {return view('cadastro.salas');})->name('PrefCadastroSalas');
@@ -50,7 +53,7 @@ Route::middleware(['auth', TipoUserController::class])->group(function () {
     //Rotas específicas Diretor
     Route::get('/cadastro/equipamentos', function () {return view('cadastro.equipamentos');})->name('DirCadastroEquipamentos');
     Route::post('/cadastro/equipamentos', [EquipamentosController::class, 'cadastrarEquipamento']);
-    Route::get('/reserva/salas', function () {return view('reservas.diretor');})->name('DirReservaSalas');
+    Route::get('/reserva/diretor', function () {return view('reservas.diretor');})->name('DirReservaSalas');
 });
 
 Route::get('/equipamentos/{id}/edit', [EquipamentosController::class, 'edit'])->name('DirEditEquipamentos');
