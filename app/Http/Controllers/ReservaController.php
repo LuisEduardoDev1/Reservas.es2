@@ -22,7 +22,7 @@ class ReservaController extends Controller
         $register->horario_inicio = $request->campoHoraIni;
         $register->horario_fim = $request->campoHoraFim;
         $register->descricao = $request->campoDescricao;
-        $register->id_professor = auth()->User()->id_usuario;
+        $register->id_professor = auth()->User()->primeiro_nome;
         $register->status = 'aguardando aprovação';
 
 
