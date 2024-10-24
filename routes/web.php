@@ -43,6 +43,11 @@ Route::middleware(['auth', TipoUserController::class])->group(function () {
     Route::get('/usuario/{id_usuario}/edit', [UsrController::class, 'edit'])->name('editUser');
     Route::put('/usuarios/{id_usuario}', [UsrController::class, 'update'])->name('updtUser');
 
+
+    //Rotas específicas pro reitoria
+    Route::get('/reserva/pro_reitoria', [ReservaController::class, 'proReiReserva'])->name('ProReReservaSalas');
+    Route::post('/reserva/pro_reitoria', [ReservaController::class, 'proReiStore']);
+
     //Rotas específicas professor
     Route::get('/reserva/professor', [ReservaController::class, 'profReserva'])->name('ProReservaSalas');
     Route::post('/reserva/professor', [ReservaController::class, 'profStore']);
