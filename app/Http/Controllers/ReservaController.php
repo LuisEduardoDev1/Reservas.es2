@@ -54,4 +54,9 @@ class ReservaController extends Controller
         return redirect()->back()->with('success', 'Parabéns! Sua reserva foi aprovada com sucesso.');
     }
 
+    public function showReservas(){
+        $reservas = ReservaProf::all();
+        return view('reservas.aguardando', compact('reservas'));
+    }
+
 }
