@@ -21,7 +21,7 @@ Route::get('/cadastro/publico', function() {return view('cadastro.publico');})->
 Route::post('/cadastro/publico', [UsrController::class, 'cadastrar']);
 
 Route::get('/cadastro/professor', function() {return view('cadastro.professor');})->name('cadastroProfessor');
-Route::post('/cadastro/professor', [ProfessorController::class, 'cadastrar']);
+Route::post('/cadastro/professor', [UsrController::class, 'cadastrar']);
 
 Route::get('/cadastro/proReitura', function() {return view('cadastro.proReitura');})->name('cadastroProReitura');
 Route::post('/cadastro/proReitura', [UsrController::class, 'cadastrar']);
