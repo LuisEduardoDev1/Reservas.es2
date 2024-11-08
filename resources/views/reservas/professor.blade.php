@@ -39,11 +39,26 @@
                 <textarea rows="7" class="form-control" style="resize: none;" name="campoDescricao" value="{{old('campoDescricao')}}" id="campoDescricao" required>
                 </textarea>
             </div>
-            <div class="d-flex justify-content-end mt-3">
+            <div class="d-flex justify-content-end mt-3 mb-3">
                 <button type="submit" class="btn btn-primary">Cadastrar</button>
             </div>
         </form>
 
 </main>
 
+<script>
+    document.getElementById('campoHoraIni').addEventListener('change', function() {
+        // Obter o valor selecionado no campo de horário inicial
+        const horaInicio = this.value;
+        
+        // Configurar o valor mínimo do campo de horário final para o valor do horário inicial
+        const campoHoraFim = document.getElementById('campoHoraFim');
+        campoHoraFim.min = horaInicio;
+        
+        // Limpar o valor do horário final se for menor que o novo mínimo
+        if (campoHoraFim.value && campoHoraFim.value < horaInicio) {
+            campoHoraFim.value = '';
+        }
+    });
+</script>
 @endsection
