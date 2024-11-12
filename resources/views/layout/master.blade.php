@@ -199,7 +199,7 @@
                             Reservas
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="{{route('MinhasReservas')}}">
                                 Minhas reservas
                             </a>
                             <a class="dropdown-item" aria-current="page" href="{{route('ProReservaSalas')}}">Solicitar pré-reserva</a>

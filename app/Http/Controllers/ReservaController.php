@@ -22,7 +22,8 @@ class ReservaController extends Controller
         $register->horario_inicio = $request->campoHoraIni;
         $register->horario_fim = $request->campoHoraFim;
         $register->descricao = $request->campoDescricao;
-        $register->id_professor = auth()->User()->primeiro_nome;
+        $register->id_professor = auth()->User()->id_usuario;
+        $register->primeiro_nome = auth()->User()->primeiro_nome;
         $register->status = 'aguardando aprovação';
 
 
@@ -64,5 +65,11 @@ class ReservaController extends Controller
         $reserva->status = 'aprovado';
         $reserva->save();
         return redirect()->route('PreReservaSalas')->with('success', 'Reserva aprovada com sucesso!');
+    }
+
+    public function minhasReservas(){
+        $id = auth()->User()->id_usuario;
+        $reservas = ReservaProf::where('id_professor', $id)->get();
+        return view('reservas.minhas', compact('reservas'));
     }
 }
