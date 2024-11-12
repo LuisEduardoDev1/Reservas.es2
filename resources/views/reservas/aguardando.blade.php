@@ -4,6 +4,9 @@
 
 <div class="container mt-5">
     <h2 class="mt-5">Pré-Reservas</h2>
+    @if ($reservas->isEmpty())
+        <div class="alert alert-warning mt-4">Nenhuma solicitação encontrada.</div>
+    @endif
         <ul class="list-group">
             @foreach ($reservas as $reserva)
                 <li class="list-group-item d-flex justify-content-between align-items-center">

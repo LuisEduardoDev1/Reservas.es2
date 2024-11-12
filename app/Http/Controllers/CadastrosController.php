@@ -10,8 +10,17 @@ class CadastrosController extends Controller
 {
     //
 
+    public function verificaSala($sala){
+        $verifica = Salas::where('numero', $sala)->first();
+        return $verifica; 
+    }
+
     public function cadastroSala(Request $request){
         $register = new Salas;
+
+        if($this->verificaSala($request->campoNumero)){
+            return redirect()->back()->with('error', 'Sala ja cadastrada!');
+        }
 
         $register->numero = $request->campoNumero;
         $register->quantidade = $request->campoQtd;
