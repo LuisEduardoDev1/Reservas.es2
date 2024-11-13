@@ -72,4 +72,11 @@ class ReservaController extends Controller
         $reservas = ReservaProf::where('id_professor', $id)->get();
         return view('reservas.minhas', compact('reservas'));
     }
+
+    public function cancelarReserva($id){
+        $reserva = ReservaProf::findOrFail($id);
+        $reserva->status = 'cancelado';
+        $reserva->save();
+        return redirect()->route('PreReservaSalas')->with('success', 'Reserva cancelada com sucesso!');
+    }
 }

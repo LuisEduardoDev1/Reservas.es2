@@ -146,6 +146,14 @@
             width: 70%;
             margin: 0 auto;
         }
+
+        #reservaAprovada{
+            background-color: rgb(175, 255, 175)
+        }
+
+        #reservaCancelada{
+            background-color: rgb(255, 175, 175)
+        }
     </style>
 </head>
 <body>

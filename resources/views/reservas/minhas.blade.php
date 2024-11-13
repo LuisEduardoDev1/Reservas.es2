@@ -9,23 +9,113 @@
     @endif
         <ul class="list-group">
             @foreach ($reservas as $reserva)
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <div>
-                        <i class="fa fa-calendar-days"></i> <b>Data:</b> {{  \Carbon\Carbon::parse($reserva->data)->format('d/m/Y') }}<br>
-                        <i class="fa fa-check-square"></i> <b>Status:</b> {{ $reserva->status }}<br> 
-                        <i class="	fa fa-hourglass-1"></i> <b>Início:</b> {{ $reserva->horario_inicio }} <br>
-                        <i class="	fa fa-hourglass-3"></i> <b>Fim:</b> {{ $reserva->horario_fim }} <br>
-                    </div>
-                    <div>
-                        <a href="{{ route('MinhasReservas') }}"></a>
-                        <form action="#" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir?');" style="display:inline;">
-                            @csrf
-                            <button type="submit" class="btn btn-danger btn-sm">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </form>
-                    </div>
-                </li>
+
+                @if($reserva->status == 'aprovado')
+
+                    <li class="list-group-item d-flex justify-content-between align-items-center mb-3 shadow rounded-lg" id="reservaAprovada">
+                        <!-- Detalhes da Reserva -->
+                        <div class="d-flex flex-column text-dark">
+                            <div>
+                                <i class="fa fa-calendar-days text-primary"></i> <strong>Data:</strong> 
+                                {{ \Carbon\Carbon::parse($reserva->data)->format('d/m/Y') }}
+                            </div>
+                            <div>
+                                <i class="fa fas fa-map-marker-alt text-success"></i> <strong>Sala:</strong> 
+                                {{ $reserva->id_sala }}
+                            </div>
+                            <div>
+                                <i class="fa fa-hourglass-1 text-warning"></i> <strong>Início:</strong> 
+                                {{ $reserva->horario_inicio }}
+                            </div>
+                            <div>
+                                <i class="fa fa-hourglass-3 text-danger"></i> <strong>Fim:</strong> 
+                                {{ $reserva->horario_fim }}
+                            </div>
+                        </div>
+            
+                        <!-- Descrição -->
+                        <div class="d-flex flex-column align-items-center justify-content-center ms-4 flex-grow-1 text-center">
+                            <strong>Motivo:</strong><br>
+                            <span>{{ $reserva->descricao }}</span>
+                        </div>
+            
+                        <div>
+                            <i class="fa fa-check-square text-success"></i> <strong>Status:</strong> 
+                            {{ $reserva->status }}
+                        </div>
+                    </li>
+
+                @elseif ($reserva->status == 'cancelado')
+
+                    <li class="list-group-item d-flex justify-content-between align-items-center mb-3 shadow" id="reservaCancelada">
+                        <!-- Detalhes da Reserva -->
+                        <div class="d-flex flex-column text-dark">
+                            <div>
+                                <i class="fa fa-calendar-days text-primary"></i> <strong>Data:</strong> 
+                                {{ \Carbon\Carbon::parse($reserva->data)->format('d/m/Y') }}
+                            </div>
+                            <div>
+                                <i class="fa fas fa-map-marker-alt text-success"></i> <strong>Sala:</strong> 
+                                {{ $reserva->id_sala }}
+                            </div>
+                            <div>
+                                <i class="fa fa-hourglass-1 text-warning"></i> <strong>Início:</strong> 
+                                {{ $reserva->horario_inicio }}
+                            </div>
+                            <div>
+                                <i class="fa fa-hourglass-3 text-danger"></i> <strong>Fim:</strong> 
+                                {{ $reserva->horario_fim }}
+                            </div>
+                        </div>
+            
+                        <!-- Descrição -->
+                        <div class="d-flex flex-column align-items-center justify-content-center ms-4 flex-grow-1 text-center">
+                            <strong>Descrição:</strong><br>
+                            <span>{{ $reserva->descricao }}</span>
+                        </div>
+            
+                        <div>
+                            <i class="fa fa-check-square text-success"></i> <strong>Status:</strong> 
+                            {{ $reserva->status }}
+                        </div>
+                    </li>
+
+                @else
+
+                    <li class="list-group-item d-flex justify-content-between align-items-center mb-3 shadow">
+                        <!-- Detalhes da Reserva -->
+                        <div class="d-flex flex-column text-dark">
+                            <div>
+                                <i class="fa fa-calendar-days text-primary"></i> <strong>Data:</strong> 
+                                {{ \Carbon\Carbon::parse($reserva->data)->format('d/m/Y') }}
+                            </div>
+                            <div>
+                                <i class="fa fas fa-map-marker-alt text-success"></i> <strong>Sala:</strong> 
+                                {{ $reserva->id_sala }}
+                            </div>
+                            <div>
+                                <i class="fa fa-hourglass-1 text-warning"></i> <strong>Início:</strong> 
+                                {{ $reserva->horario_inicio }}
+                            </div>
+                            <div>
+                                <i class="fa fa-hourglass-3 text-danger"></i> <strong>Fim:</strong> 
+                                {{ $reserva->horario_fim }}
+                            </div>
+                        </div>
+            
+                        <!-- Descrição -->
+                        <div class="d-flex flex-column align-items-center justify-content-center ms-4 flex-grow-1 text-center">
+                            <strong>Descrição:</strong><br>
+                            <span>{{ $reserva->descricao }}</span>
+                        </div>
+            
+                        <div>
+                            <i class="fa fa-check-square text-success"></i> <strong>Status:</strong> 
+                            {{ $reserva->status }}
+                        </div>
+                    </li>
+
+                @endif
             @endforeach
         </ul>
 </div>
