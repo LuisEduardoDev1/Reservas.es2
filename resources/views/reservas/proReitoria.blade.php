@@ -5,6 +5,7 @@
 <main>
 
     <h1>Reserva de salas</h1>
+    <span style="color: gray">Pró-Reitura</span>
 
     <form action="" method="post">
             @csrf

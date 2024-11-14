@@ -14,8 +14,44 @@ class ReservaController extends Controller
         return view('reservas.professor', compact('salas'));
     }
 
+    public function verificarReservaProf($ini, $fim, $sala, $data){
+        $verifica = ReservaProf::where('id_sala', $sala)
+        ->where('data', $data)
+        ->where(function($query) use ($ini) {
+            $query->whereTime('horario_inicio', '<=', $ini)
+                  ->whereTime('horario_fim', '>=', $ini);
+        })->orWhere(function($query) use ($fim) {
+            $query->whereTime('horario_inicio', '<=', $fim)
+                  ->whereTime('horario_fim', '>=', $fim);
+        })   
+        ->where('status', 'aprovado')->first();
+
+        return $verifica;        
+    }
+
+    public function verificarReservaProRei($ini, $fim, $sala, $data){
+        $verifica = ReservaProRei::where('id_sala', $sala)
+        ->where('data', $data)
+        ->where(function($query) use ($ini) {
+            $query->whereTime('horario_inicio', '<=', $ini)
+                  ->whereTime('horario_fim', '>=', $ini);
+        })->orWhere(function($query) use ($fim) {
+            $query->whereTime('horario_inicio', '<=', $fim)
+                  ->whereTime('horario_fim', '>=', $fim);
+        })->first();
+
+        return $verifica;        
+    }
+
     function profStore(Request $request){
         $register = new ReservaProf();
+
+        if($this->verificarReservaProf($request->campoHoraIni, $request->campoHoraFim, $request->campoSala, $request->campoData)){
+            return redirect()->back()->with('error', 'Sala ocupada nesse horário!');
+        }
+        if($this->verificarReservaProRei($request->campoHoraIni, $request->campoHoraFim, $request->campoSala, $request->campoData)){
+            return redirect()->back()->with('error', 'Sala ocupada nesse horário!');
+        }
 
         $register->id_sala = $request->campoSala;
         $register->data = $request->campoData;
@@ -40,6 +76,13 @@ class ReservaController extends Controller
 
     function proReiStore(Request $request){
         $register = new ReservaProRei();
+
+        if($this->verificarReservaProf($request->campoHoraIni, $request->campoHoraFim, $request->campoSala, $request->campoData)){
+            return redirect()->back()->with('error', 'Sala ocupada nesse horário!');
+        }
+        if($this->verificarReservaProRei($request->campoHoraIni, $request->campoHoraFim, $request->campoSala, $request->campoData)){
+            return redirect()->back()->with('error', 'Sala ocupada nesse horário!');
+        }
 
         $register->id_sala = $request->campoSala;
         $register->data = $request->campoData;
@@ -69,8 +112,16 @@ class ReservaController extends Controller
 
     public function minhasReservas(){
         $id = auth()->User()->id_usuario;
-        $reservas = ReservaProf::where('id_professor', $id)->get();
-        return view('reservas.minhas', compact('reservas'));
+        if(auth()->User()->tipo == 2){
+            $reservas = ReservaProf::where('id_professor', $id)->get();
+            return view('reservas.minhas', compact('reservas'));
+        }elseif(auth()->User()->tipo == 4){
+            $reservas = ReservaProRei::where('id_pro_reitoria', $id)->get();
+            return view('reservas.minhas', compact('reservas'));
+        }else {
+            $reservas = ReservaProf::where('id_professor', $id)->get();
+            return view('reservas.minhas', compact('reservas'));
+        }
     }
 
     public function cancelarReserva($id){
