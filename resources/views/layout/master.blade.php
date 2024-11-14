@@ -101,6 +101,10 @@
             section.hero{
                 margin-top: 0px;
             }
+            #logo{
+                margin-top: 20px;
+                width: 70px;
+            }
         }
         @media(max-height:600px){
             section.hero{
@@ -169,6 +173,9 @@
                     @if (Auth::user()->tipo == 5)
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="{{route('PreReservaSalas')}}">Solicitações</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{{route('PrefReservasAprovadas')}}">Reservas</a>
                         </li>
                         <div class="nav-item dropdown">
                             <a class="nav-link active dropdown-toggle" data-bs-toggle="dropdown" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

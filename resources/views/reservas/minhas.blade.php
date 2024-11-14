@@ -35,12 +35,12 @@
             
                         <!-- Descrição -->
                         <div class="d-flex flex-column align-items-center justify-content-center ms-4 flex-grow-1 text-center">
-                            <strong>Motivo:</strong><br>
+                            <strong>Descrição:</strong><br>
                             <span>{{ $reserva->descricao }}</span>
                         </div>
             
                         <div>
-                            <i class="fa fa-check-square text-success"></i> <strong>Status:</strong> 
+                            <i class="fa fa-check-square text-success"></i> <strong>Status:</strong> <br>
                             {{ $reserva->status }}
                         </div>
                     </li>
@@ -75,7 +75,7 @@
                         </div>
             
                         <div>
-                            <i class="fa fa-check-square text-success"></i> <strong>Status:</strong> 
+                            <i class="fa fa-check-square text-success"></i> <strong>Status:</strong> <br>
                             {{ $reserva->status }}
                         </div>
                     </li>
@@ -110,7 +110,7 @@
                         </div>
             
                         <div>
-                            <i class="fa fa-check-square text-success"></i> <strong>Status:</strong> 
+                            <i class="fa fa-check-square text-success"></i> <strong>Status:</strong> <br>
                             {{ $reserva->status }}
                         </div>
                     </li>

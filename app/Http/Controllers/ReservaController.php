@@ -130,4 +130,11 @@ class ReservaController extends Controller
         $reserva->save();
         return redirect()->route('PreReservaSalas')->with('success', 'Reserva cancelada com sucesso!');
     }
+
+    public function aprovadas(){
+        $reservas = ReservaProf::where('status', 'aprovado')->get(); 
+        $reservasProRei = ReservaProRei::where('status', 'aprovado')->get();
+
+        return view('reservas.aprovadas', compact('reservas', 'reservasProRei'));
+    }
 }

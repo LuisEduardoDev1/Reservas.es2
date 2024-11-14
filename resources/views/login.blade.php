@@ -5,8 +5,8 @@
     <img id="logo" src="/img/logo.jpeg" width=70px heigth=70px alt="logo da uespi">
     <style>
         #logo {
-            margin-left: 18em;
             margin-bottom: 10px;
+            align-self: center;
         }
     </style>
 

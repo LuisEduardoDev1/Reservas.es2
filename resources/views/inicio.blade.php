@@ -6,7 +6,9 @@
     <img id="logo" src="/img/logo.jpeg" width=70px heigth=70px alt="logo da uespi">
     <style>
         #logo {
-                margin-left: 38em; 
+            display: flex;
+            justify-self: center;
+            margin: 0 auto;
             }
     </style>
     
