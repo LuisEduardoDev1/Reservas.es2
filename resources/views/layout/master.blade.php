@@ -67,7 +67,7 @@
         section.hero {
             color: rgb(0, 0, 0);
             text-align: center;
-            padding: 100px 20px;
+            padding: 50px 20px;
         }
         .hero h1 {
             font-size: 48px;

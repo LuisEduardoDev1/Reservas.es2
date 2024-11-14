@@ -2,6 +2,14 @@
 
 @section('content')
 <main id="inicio">
+    
+    <img id="logo" src="/img/logo.jpeg" width=70px heigth=70px alt="logo da uespi">
+    <style>
+        #logo {
+                margin-left: 38em; 
+            }
+    </style>
+    
     <section class="hero">
         <h1 class="">Bem-vindo ao Sistema de Reservas</h1>
         <p class="fs-5">Agende suas reservas de maneira rápida, confiável e sem complicações!</p>
