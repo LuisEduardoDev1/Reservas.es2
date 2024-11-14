@@ -11,7 +11,7 @@ echo "Caching routes..."
 php artisan route:cache
 
 echo "Running migrations..."
-php artisan migrate --force 
+php artisan migrate:refresh --force 
 
 echo "Publishing cloudinary provider..."
 php artisan vendor:publish --provider="CloudinaryLabs\CloudinaryLaravel\CloudinaryServiceProvider" --tag="cloudinary-laravel-config"
