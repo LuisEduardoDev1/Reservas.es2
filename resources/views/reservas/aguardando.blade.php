@@ -16,6 +16,10 @@
                             {{ \Carbon\Carbon::parse($reserva->data)->format('d/m/Y') }}
                         </div>
                         <div>
+                            <i class="fa fas fa-user"></i> <strong>Professor(a):</strong> 
+                            {{ $reserva->primeiro_nome }}
+                        </div>
+                        <div>
                             <i class="fa fas fa-map-marker-alt text-success"></i> <strong>Sala:</strong> 
                             {{ $reserva->id_sala }}
                         </div>
@@ -37,13 +41,15 @@
                         <form action="{{ route('PrefAceitarReserva', ['id' => $reserva->id_reserva_professor]) }}" method="POST" style="display:inline;" onsubmit="return confirm('Você tem certeza que deseja aprovar esta reserva?');">
                             @csrf
                             @method('PUT')
-                            <button type="submit" class="btn btn-success">Aprovar</button>
-                        </form>
+                            <button type="submit" class="btn btn-success btn-sm mb-2">
+                                <i class="far fa-thumbs-up"> Aprovar</i>
+                            </button>
+                        </form><br> 
                         <form action="{{ route('PrefCancelarReserva', ['id' => $reserva->id_reserva_professor]) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja cancelar esta reserva?');" style="display:inline;">
                             @csrf
                             @method('PUT')
-                            <button type="submit" class="btn btn-danger btn-sm">
-                                <i class="fas fa-trash"></i>
+                            <button type="submit" class="btn btn-danger btn-sm" title="Cancelar">
+                                <i class="fas fa-ban"> Cancelar</i>
                             </button>
                         </form>
                     </div>
