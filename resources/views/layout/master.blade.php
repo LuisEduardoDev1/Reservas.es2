@@ -171,6 +171,12 @@
         #reservaCancelada{
             background-color: rgb(255, 175, 175)
         }
+
+        #popup{
+            border-style: none;
+            border-radius: 10px;
+            box-shadow: #000000 0px 0px 6px;
+        }
     </style>
 </head>
 <body>

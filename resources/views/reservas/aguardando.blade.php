@@ -24,12 +24,12 @@
                             {{ $reserva->id_sala }}
                         </div>
                         <div>
-                            <i class="fa fa-hourglass-1 text-warning"></i> <strong>Início:</strong> 
-                            {{ $reserva->horario_inicio }}
+                            <i class="fa fa-clock text-warning"></i>
+                            <span><strong>Início:</strong> {{ \Carbon\Carbon::parse($reserva->horario_inicio)->format('H:i') }}</span>
                         </div>
                         <div>
-                            <i class="fa fa-hourglass-3 text-danger"></i> <strong>Fim:</strong> 
-                            {{ $reserva->horario_fim }}
+                            <i class="fa fa-clock text-danger"></i>
+                            <span><strong>Fim:</strong> {{ \Carbon\Carbon::parse($reserva->horario_fim)->format('H:i') }}</span>
                         </div>
                     </div>
         
