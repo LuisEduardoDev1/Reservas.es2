@@ -38,7 +38,7 @@ class ReservaController extends Controller
         })->orWhere(function($query) use ($fim) {
             $query->whereTime('horario_inicio', '<=', $fim)
                   ->whereTime('horario_fim', '>=', $fim);
-        })->first();
+        })->where('status', 'aprovado')->first();
 
         return $verifica;        
     }
@@ -124,9 +124,10 @@ class ReservaController extends Controller
         }
     }
 
-    public function cancelarReserva($id){
+    public function cancelarReserva($id, Request $request){
         $reserva = ReservaProf::findOrFail($id);
         $reserva->status = 'cancelado';
+        $reserva->motivo_cancelamento = $request->motivo_cancelamento;
         $reserva->save();
         return redirect()->route('PreReservaSalas')->with('success', 'Reserva cancelada com sucesso!');
     }

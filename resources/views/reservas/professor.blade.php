@@ -20,7 +20,7 @@
 
                 </div>
                 <div>
-                    <label for="campoData" class="form-label mt-3">Ano:</label>
+                    <label for="campoData" class="form-label mt-3">Data:</label>
                     <input type="date" class="form-control" value="{{old('campoData')}}" name="campoData" id="campoData" min="{{ date('Y-m-d') }}" required>
                 </div>
             </div>
