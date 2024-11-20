@@ -138,4 +138,24 @@ class ReservaController extends Controller
 
         return view('reservas.aprovadas', compact('reservas', 'reservasProRei'));
     }
+
+    public function calendario(){
+        $reservas = ReservaProf::where('status', 'aprovado')->get(); 
+        $reservasProRei = ReservaProRei::where('status', 'aprovado')->get();
+
+        $eventos = $reservas->map(function ($reserva) {
+            return [
+                'title' => $reserva->primeiro_nome, // Substitua 'nome' pelo campo desejado
+                'start' => $reserva->data,
+            ];
+        })->merge($reservasProRei->map(function ($reservaProRei) {
+            return [
+                'title' => 'Pró-Reitoria', // Substitua 'nome' pelo campo desejado
+                'start' => $reservaProRei->data,
+            ];
+        }));
+    
+        // Envia os eventos para a view
+        return view('calendario', compact('eventos'));
+    }
 }

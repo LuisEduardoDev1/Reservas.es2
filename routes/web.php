@@ -14,7 +14,7 @@ Route::get('/', function () {return view('inicio');})->name('inicio');
 Route::get('/escolher', function() {return view('cadastro.escolher');})->name('escolher');
 
 
-Route::get('/calendario', function () {return view('calendario');})->name('calendario');
+Route::get('/calendario', [ReservaController::class, 'calendario'])->name('calendario');
 Route::get('/escolher', function() {return view('cadastro.escolher');})->name('escolher');
 
 Route::get('/cadastro/publico', function() {return view('cadastro.publico');})->name('cadastroPubl');
