@@ -209,7 +209,10 @@
                         </div>
                         @else
                         <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{route('ShowSalas')}}">Salas</a>
+                            <a class="nav-link active" aria-current="page" href="{{route('ShowSalas')}}">Salas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{{route('calendario')}}">Calendário</a>
                         </li>
                     @endif
                 @endauth

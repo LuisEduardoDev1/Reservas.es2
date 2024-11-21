@@ -16,30 +16,37 @@ class ReservaController extends Controller
 
     public function verificarReservaProf($ini, $fim, $sala, $data){
         $verifica = ReservaProf::where('id_sala', $sala)
-        ->where('data', $data)
-        ->where(function($query) use ($ini) {
-            $query->whereTime('horario_inicio', '<=', $ini)
-                  ->whereTime('horario_fim', '>=', $ini);
-        })->orWhere(function($query) use ($fim) {
-            $query->whereTime('horario_inicio', '<=', $fim)
-                  ->whereTime('horario_fim', '>=', $fim);
-        })   
-        ->where('status', 'aprovado')->first();
-
+            ->where('data', $data)
+            ->where(function ($query) use ($ini, $fim) {
+                $query->where(function ($q) use ($ini) {
+                    $q->whereTime('horario_inicio', '<=', $ini)
+                      ->whereTime('horario_fim', '>=', $ini);
+                })->orWhere(function ($q) use ($fim) {
+                    $q->whereTime('horario_inicio', '<=', $fim)
+                      ->whereTime('horario_fim', '>=', $fim);
+                });
+            })
+            ->where('status', 'aprovado')
+            ->first();
+    
         return $verifica;        
     }
-
+    
     public function verificarReservaProRei($ini, $fim, $sala, $data){
         $verifica = ReservaProRei::where('id_sala', $sala)
-        ->where('data', $data)
-        ->where(function($query) use ($ini) {
-            $query->whereTime('horario_inicio', '<=', $ini)
-                  ->whereTime('horario_fim', '>=', $ini);
-        })->orWhere(function($query) use ($fim) {
-            $query->whereTime('horario_inicio', '<=', $fim)
-                  ->whereTime('horario_fim', '>=', $fim);
-        })->where('status', 'aprovado')->first();
-
+            ->where('data', $data)
+            ->where(function ($query) use ($ini, $fim) {
+                $query->where(function ($q) use ($ini) {
+                    $q->whereTime('horario_inicio', '<=', $ini)
+                      ->whereTime('horario_fim', '>=', $ini);
+                })->orWhere(function ($q) use ($fim) {
+                    $q->whereTime('horario_inicio', '<=', $fim)
+                      ->whereTime('horario_fim', '>=', $fim);
+                });
+            })
+            ->where('status', 'aprovado')
+            ->first();
+    
         return $verifica;        
     }
 
@@ -140,8 +147,8 @@ class ReservaController extends Controller
     }
 
     public function calendario(){
-        $reservas = ReservaProf::where('status', 'aprovado')->get(); 
-        $reservasProRei = ReservaProRei::where('status', 'aprovado')->get();
+        $reservas = collect(ReservaProf::where('status', 'aprovado')->get());
+    $reservasProRei = collect(ReservaProRei::where('status', 'aprovado')->get());
 
         $eventos = $reservas->map(function ($reserva) {
             return [
