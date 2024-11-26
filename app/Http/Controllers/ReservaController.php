@@ -148,17 +148,21 @@ class ReservaController extends Controller
 
     public function calendario(){
         $reservas = collect(ReservaProf::where('status', 'aprovado')->get());
-    $reservasProRei = collect(ReservaProRei::where('status', 'aprovado')->get());
+        $reservasProRei = collect(ReservaProRei::where('status', 'aprovado')->get());
 
         $eventos = $reservas->map(function ($reserva) {
             return [
-                'title' => $reserva->primeiro_nome, // Substitua 'nome' pelo campo desejado
-                'start' => $reserva->data,
+                'title' => $reserva->primeiro_nome,  // Nome da reserva (pode ser alterado conforme a necessidade)
+                'start' => $reserva->data . 'T' . $reserva->horario_inicio,  // Data e hora de início
+                'end' => $reserva->data . 'T' . $reserva->horario_fim, 
+                'description' => $reserva->descricao ?? 'Sem descrição',  // Adiciona a descrição, caso exista
             ];
         })->merge($reservasProRei->map(function ($reservaProRei) {
             return [
-                'title' => 'Pró-Reitoria', // Substitua 'nome' pelo campo desejado
-                'start' => $reservaProRei->data,
+                'title' => 'Pró-Reitoria',  // Título fixo para a reserva da Pró-Reitoria
+                'start' => $reservaProRei->data . 'T' . $reservaProRei->horario_inicio,  // Data e hora de início
+                'end' => $reservaProRei->data . 'T' . $reservaProRei->horario_fim, 
+                'description' => $reservaProRei->descricao ?? 'Sem descrição',  // Descrição da reserva, caso exista
             ];
         }));
     
