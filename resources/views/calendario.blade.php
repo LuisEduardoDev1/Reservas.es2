@@ -11,6 +11,12 @@
 </style>
 <main>
     <h1 class="text-center"><i class="fas fa-calendar-alt"></i> Calendário</h1>
+    <select class="form-select" aria-label="Default select example" id="campoSala" name="campoSala">
+        <option value="" disabled selected>Selecione uma sala</option>
+        @foreach ($salas as $sala)
+            <option value="{{ $sala->numero }}">{{ $sala->numero }}</option>
+        @endforeach
+    </select>
     <div id='calendar'></div>
 
     <!-- Dialog para mostrar os detalhes da reserva -->
@@ -62,10 +68,12 @@
 
         // Acessando a descrição (se houver) através de extendedProps
         var description = event.extendedProps.description || 'Sem descrição';  // Descrição (caso exista)
+        var local = event.extendedProps.local || 'Local não especificado';
 
         // Preenche o conteúdo do popup com os dados do evento
         var reservationInfo = `
             <p><strong>Reservado por:</strong> ${title}</p>
+            <p><strong>Sala:</strong> ${local}</p>
             <p><strong>Data:</strong> ${startDate}</p>
             <p><strong>Início:</strong> ${startTime}</p>
             <p><strong>Término:</strong> ${endTime}</p>
