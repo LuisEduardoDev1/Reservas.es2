@@ -45,6 +45,9 @@
             locale: 'pt-br',
             initialView: 'dayGridMonth',
             events: eventos, // Passa os eventos para o calendário
+            buttonText: {
+                today: 'Hoje' // Tradução do botão 'today' para 'Hoje'
+            },
 
             eventClick: function(info) {
         // Obtém os dados do evento
