@@ -240,6 +240,9 @@
                             <a class="dropdown-item" aria-current="page" href="{{route('ShowEquipamentos')}}">Cadastrados</a>
                         </div>
                     </div>
+                    <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{route('DirReservaSalas')}}">Reserva</a>
+                    </li>
                     @elseif (Auth::user()->tipo == 2)
                     <div class="nav-item dropdown">
                         <a class="nav-link active dropdown-toggle" data-bs-toggle="dropdown" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

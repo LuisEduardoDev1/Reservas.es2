@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Equipamentos;
 use App\Models\Equipamentos_reserva;
+use App\Models\ReservaDiretoria;
 use App\Models\ReservaProf;
 use App\Models\ReservaProRei;
 use App\Models\Salas;
@@ -212,5 +213,61 @@ class ReservaController extends Controller
         $reserva->save();
 
         return redirect()->back()->with('success', 'Reserva realizada com sucesso!');
+    }
+
+    public function viewReservaDiretor(){
+        $salas = Salas::all();
+        return view('reservas.diretor', compact('salas'));
+    }
+
+    public function reservadiretoria(Request $request){
+        $ano = $request->campoAno;
+        $diaSemana = $request->campoDia; // O dia da semana selecionado (1=Segunda, 2=Terça, ...)
+        $periodo = $request->campoPeriodo; // 1=1º semestre (Jan-Junho), 2=2º semestre (Jul-Dez)
+        $salas = $request->campoSala; // Lista de salas selecionadas
+
+        // Valida se os dados são adequados
+        if (empty($ano) || empty($diaSemana) || empty($periodo) || empty($salas)) {
+            return redirect()->back()->with('error', 'Todos os campos são obrigatórios.');
+        }
+
+        // Define o intervalo de meses baseado no semestre
+        if ($periodo == 1) {
+            $meses = range(1, 6);  // Janeiro a Junho
+        } else {
+            $meses = range(7, 12); // Julho a Dezembro
+        }
+
+        // Laço para percorrer todas as salas selecionadas
+        foreach ($salas as $sala) {
+            // Laço para percorrer todos os meses do período selecionado
+            foreach ($meses as $mes) {
+                // Obter todas as datas do mês que correspondem ao dia da semana escolhido
+                $diasDoMes = $this->obterDiasDaSemana($ano, $mes, $diaSemana);
+
+                // Laço para percorrer todos os dias da semana no mês
+                foreach ($diasDoMes as $dia) {
+                    // Cria a reserva para cada combinação de sala, dia e período
+                    $register = new ReservaDiretoria();
+
+                    // Concatena o ano, mês e dia em uma data única no formato Y-m-d
+                    $dataReserva = $ano . '-' . str_pad($mes, 2, '0', STR_PAD_LEFT) . '-' . str_pad($dia, 2, '0', STR_PAD_LEFT);
+
+                    // Atribui os dados
+                    $register->id_sala = $sala;
+                    $register->horario_inicio = $request->campoHoraIni;  // Hora de início
+                    $register->horario_fim = $request->campoHoraFim;    // Hora de fim
+                    $register->descricao = $request->campoDescricao;
+                    $register->id_diretor = auth()->User()->id_usuario;
+                    $register->data = $dataReserva; // Salva a data completa
+                    $register->periodo = $periodo; // Período (1 ou 2)
+
+                    // Salva a reserva
+                    $register->save();
+                }
+            }
+        }
+
+        return redirect()->back()->with('success', 'Parabéns! Sua reserva foi aprovada com sucesso.');
     }
 }
