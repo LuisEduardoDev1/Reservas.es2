@@ -53,9 +53,16 @@
         .nome{
             display: flex;
             justify-content: space-between;
+
         }
-        .nome div{
+        .nome div, .data div{
             width: 49%;
+        }
+
+        .data{
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
         }
 
         #alertas{
@@ -242,7 +249,8 @@
                             <a class="dropdown-item" href="{{route('MinhasReservas')}}">
                                 Minhas reservas
                             </a>
-                            <a class="dropdown-item" aria-current="page" href="{{route('ProReservaSalas')}}">Solicitar pré-reserva</a>
+                            <a class="dropdown-item" aria-current="page" href="{{route('ProfReservaSalas')}}">Solicitar pré-reserva</a>
+                            <a class="dropdown-item" aria-current="page" href="{{route('ProfReservaSalas')}}">Equipamentos</a>
                         </div>
                     </div>
                     @elseif (Auth::user()->tipo == 4)

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Equipamentos;
+use App\Models\Equipamentos_reserva;
 use App\Models\ReservaProf;
 use App\Models\ReservaProRei;
 use App\Models\Salas;
@@ -120,8 +122,9 @@ class ReservaController extends Controller
     public function minhasReservas(){
         $id = auth()->User()->id_usuario;
         if(auth()->User()->tipo == 2){
+            $reservas_equipamentos = Equipamentos_reserva::where('id_professor', $id)->get();
             $reservas = ReservaProf::where('id_professor', $id)->get();
-            return view('reservas.minhas', compact('reservas'));
+            return view('reservas.minhas', compact('reservas', 'reservas_equipamentos'));
         }elseif(auth()->User()->tipo == 4){
             $reservas = ReservaProRei::where('id_pro_reitoria', $id)->get();
             return view('reservas.minhas', compact('reservas'));
@@ -171,5 +174,41 @@ class ReservaController extends Controller
     
         // Envia os eventos para a view
         return view('calendario', compact('eventos', 'salas'));
+    }
+
+    public function viewEquipamento()
+    {
+        $equipamentos = Equipamentos::all();
+        return view('reservas.equipamentos', compact('equipamentos'));
+    }
+
+    public function getEspecificacoes($tipo)
+    {
+        $equipamentos = Equipamentos::where('nome', $tipo)->get();
+        
+        return response()->json($equipamentos->pluck('descricao', 'id_equipamentos'));
+    }
+
+    public function reservarEquipamento(Request $request)
+    {
+        $equipamento = $request->input('campoEspecificacao');
+        if (!is_numeric($equipamento)) {
+            return redirect()->back()->with('error', 'O ID do equipamento é inválido.');
+        }
+        $data = $request->input('campoData');
+        $horario_inicio = $request->input('campoHoraIni');
+        $horario_fim = $request->input('campoHoraFim');
+        $descricao = $request->input('campoDescricao');
+
+        $reserva = new Equipamentos_reserva();
+        $reserva->id_equipamentos = $equipamento;
+        $reserva->data = $data;
+        $reserva->horario_inicio = $horario_inicio;
+        $reserva->horario_fim = $horario_fim;
+        $reserva->descricao = $descricao;
+        $reserva->id_professor = auth()->User()->id_usuario;
+        $reserva->save();
+
+        return redirect()->back()->with('success', 'Reserva realizada com sucesso!');
     }
 }
