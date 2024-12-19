@@ -48,8 +48,12 @@
 
 <div class="container mt-5">
     <h2 class="mt-5">Minhas Reservas</h2>
+
+    <hr>
+
+    <h4>Salas</h4>
     @if ($reservas->isEmpty())
-        <div class="alert alert-warning mt-4">Você ainda não tem nenhuma reserva.</div>
+        <div class="alert alert-warning mt-4">Você ainda não tem nenhuma reserva de sala.</div>
     @endif
         <ul class="list-group">
             @foreach ($reservas as $reserva)
@@ -180,6 +184,10 @@
             @endforeach
 
             <h4>Equipamentos</h4>
+
+            @if($reservas_equipamentos->isEmpty())
+                <div class="alert alert-warning mt-4">Você ainda não tem nenhuma reserva de equipamentos.</div>
+            @endif
 
             @foreach ($reservas_equipamentos as $equipamentos)
             <table class="table table-bordered table-striped table-hover">

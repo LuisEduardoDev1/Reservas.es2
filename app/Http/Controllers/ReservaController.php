@@ -178,8 +178,10 @@ class ReservaController extends Controller
 
     public function viewEquipamento()
     {
+        $id = auth()->User()->id_usuario;
+        $reservas = Equipamentos_reserva::where('id_professor',$id)->get();
         $equipamentos = Equipamentos::all();
-        return view('reservas.equipamentos', compact('equipamentos'));
+        return view('reservas.equipamentos', compact('equipamentos', 'reservas'));
     }
 
     public function getEspecificacoes($tipo)

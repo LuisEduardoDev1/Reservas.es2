@@ -2,6 +2,37 @@
 
 @section('content')
 
+<style>
+    .table th, .table td {
+        padding: 8px;
+        text-align: center;
+    }
+
+    .table th:nth-child(1), .table td:nth-child(1) {
+        width: 15%;  /* 15% da largura total da tabela */
+    }
+
+    .table th:nth-child(2), .table td:nth-child(2) {
+        width: 15%;  /* 20% da largura total da tabela */
+    }
+
+    .table th:nth-child(3), .table td:nth-child(3) {
+        width: 25%;  /* 25% da largura total da tabela */
+    }
+
+    .table th:nth-child(4), .table td:nth-child(4) {
+        width: 10%;  /* 10% da largura total da tabela */
+    }
+
+    .table th:nth-child(5), .table td:nth-child(5) {
+        width: 10%;  /* 10% da largura total da tabela */
+    }
+
+    .table th:nth-child(6), .table td:nth-child(6) {
+        width: 25%;  /* 20% da largura total da tabela */
+    }
+</style>
+
 <main>
 
     <h1>Reserva de Equipamentos</h1>
@@ -52,6 +83,41 @@
             </div>
         </form>
 
+    <hr>
+    <h4>Minhas reservas de equipamentos</h4>
+    <br>
+
+    @if($reservas->isEmpty())
+        <div class="alert alert-warning mt-4">Você ainda não tem nenhuma reserva de equipamentos.</div>
+    @endif
+
+    @foreach ($reservas as $equipamentos)
+    <table class="table table-bordered table-striped table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th class="text-center">Data</th>
+            <th class="text-center">Equipamento</th>
+            <th class="text-center">Especificações</th>
+            <th class="text-center">Hora Início</th>
+            <th class="text-center">Hora Fim</th>
+            <th class="text-center">Descrição</th>
+        </tr>
+    </thead>
+    <tbody>
+        <div class="list-group">
+        
+            <tr>
+                <td class="text-center">{{ \Carbon\Carbon::parse($equipamentos->data)->format('d/m/Y') }}</td>
+                <td class="text-center">{{ $equipamentos->equipamento->nome }}</td>
+                <td class="text-center">{{ $equipamentos->equipamento->descricao }}</td>
+                <td class="text-center">{{ \Carbon\Carbon::parse($equipamentos->horario_inicio)->format('H:i') }}</td>
+                <td class="text-center">{{ \Carbon\Carbon::parse($equipamentos->horario_fim)->format('H:i') }}</td>
+                <td class="text-center">{{ $equipamentos->descricao }}</td>
+            </tr>
+        </div>
+    </tbody>
+    @endforeach
+    </table>
 </main>
 
 
